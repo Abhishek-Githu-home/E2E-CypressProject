@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-01-10T17:14:29.424Z",
+    "end": "2026-01-10T17:14:48.321Z",
+    "duration": 18897,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "605565a3-64a7-45d2-b1f5-7a8f56fb92c2",
+      "title": "",
+      "fullFile": "cypress\\e2e\\examples\\Test1 - Basic_functions, Promises.js",
+      "file": "cypress\\e2e\\examples\\Test1 - Basic_functions, Promises.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a9589543-5437-4ff1-95cc-3596b920be39",
+          "title": "My first test suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "My first test case",
+              "fullTitle": "My first test suite My first test case",
+              "timedOut": null,
+              "duration": 17330,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\examples\\\\Test1 - Basic_functions, Promises.js\"\n}",
+              "code": "cy.visit(\"https://rahulshettyacademy.com/seleniumPractise/#/\");\ncy.get(\"input[type='search']\").type('ca');\ncy.wait(2000);\ncy.get('.product').should('have.length', 5);\ncy.get('.product:visible').should('have.length', 4); //should is assertion of chai to confirm the presence\n//product:visible - Visible helps to retrive only visible elements in UI\n//Parent child chaining:\ncy.get('.products').find('.product').should('have.length', 4);\n//eq(index) - helps in selecting the specifc product, starts from 0,1,2,3\n//adding cart the 2nd product\ncy.get('.products').find('.product').eq(2).contains(\"ADD TO CART\").click();\n//each - iterates over an array for elements\ncy.wait(2000);\ncy.get('.products').find('.product').each(function ($el, index, $list) {\n  //.each(($el, index, $list) => { ... }): This command loops through every single product found.\n  //$el: Represents the individual product element currently being looped over. Note: This is a jQuery element, not a Cypress chainable subject.\n  //index: The position of the element in the list (0, 1, 2, etc.).\n  //$list: The original list of all elements.\n  var vegetable = $el.find('h4.product-name').text();\n  if (vegetable.includes('Cashews')) {\n    cy.wrap($el).find('button').click();\n  }\n});\n//handling the promise is not possible since we are defining the variable which is not part of direct cypress exection ex. defining in const logo = cy.get('.find')\ncy.get('.brand').then(function (logo) {\n  cy.log(logo.text()); //Printing the text output\n  cy.get('.brand').should('have.text', 'GREENKART'); //Assert if text is correctly displayed - In assertion, the promise will be handled so text will be handled\n  cy.log(\"The text is printed successfully\");\n});\n//cy.get('.brand').text() = This will not work since text is not cypress command too\n// cypress also supports the Jquery methods, text() is Jquery method. Non cypress commands cannot resolve themselves. we need to resolve manually by using then method)\n//Handling Asyn promise with cypress commands\ncy.get('.products').as('Product Locator'); // alias = .as()\ncy.get('@Product Locator').find('.product').should('have.length', 4);\ncy.get(\"@Product Locator\").find('.product').eq(2).contains(\"ADD TO CART\").click();\ncy.get('a.cart-icon').click();\ncy.get('.cart-items').find('.cart-item').as('available cart');\ncy.wait(3000);\ncy.get('@available cart').find('p.product-name:visible').contains('Capsicum').then(function ($item1) {\n  var text1 = $item1.text();\n  cy.log(text1 + \" Is available in cart\");\n});\ncy.get('@available cart').find('p.product-name:visible').contains('Cashews').then(function ($item2) {\n  var text2 = $item2.text();\n  cy.log(text2 + \" Is available in cart\");\n});\ncy.contains('PROCEED TO CHECKOUT').then(function (Checkout) {\n  cy.log(Checkout.click() + \"Proceed to checkout done successfully\");\n});\ncy.get('input[placeholder=\"Enter promo code\"]').type(\"ABHICODE30\");\ncy.get('.promoBtn').then(function ($Promo) {\n  var code = $Promo.click();\n  cy.get(code).contains('Applying');\n  cy.wait(3000);\n  cy.get('.promoinfo').should('have.text', 'Invalid code ..!');\n  cy.contains('Place Order').click().then(function (Order) {\n    cy.log(Order.click() + \"Order Placed successfully\");\n  });\n});",
+              "err": {},
+              "uuid": "bb20a915-1d5e-4fa6-adfe-dc992741816c",
+              "parentUUID": "a9589543-5437-4ff1-95cc-3596b920be39",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bb20a915-1d5e-4fa6-adfe-dc992741816c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 17330,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

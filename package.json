@@ -1,0 +1,29 @@
+{
+  "name": "cypressautomation",
+  "version": "1.0.0",
+  "description": "Learn the cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open",
+    "E2E" : "npx cypress run cypress/e2e/examples/*.js" 
+  },
+  "cypress-cucumber-preprocessor": {
+    "json": {
+      "enabled": true,
+      "output": "cypress/cucumberReports/results.json"
+    }
+  },
+  "author": "Abhishek",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
+    "cucumber-html-reporter": "^7.2.0",
+    "cypress": "latest",
+    "cypress-iframe": "latest",
+    "cypress-mochawesome-reporter": "latest",
+    "neat-csv": "5.1.0"
+  },
+  "dependencies": {
+    "@cypress/browserify-preprocessor": "^3.0.2"
+  }
+}

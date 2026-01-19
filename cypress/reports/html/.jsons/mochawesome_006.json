@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2026-01-10T17:14:22.304Z",
+    "end": "2026-01-10T17:14:23.259Z",
+    "duration": 955,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f467c531-8e4b-4a50-b2ee-5ffb06974477",
+      "title": "",
+      "fullFile": "cypress\\e2e\\examples\\E2EFramework.js",
+      "file": "cypress\\e2e\\examples\\E2EFramework.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f36de00d-f445-4fe8-b0a2-09a8f4b45259",
+          "title": "E2E Ecommerce test",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verification of E2E Positive flow",
+              "fullTitle": "E2E Ecommerce test Verification of E2E Positive flow",
+              "timedOut": null,
+              "duration": 275,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\examples\\\\E2EFramework.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\examples\\\\E2EFramework.js\\\\E2E Ecommerce test -- Verification of E2E Positive flow (failed).png\"\n      ],\n      [\n        \"\\\\examples\\\\E2EFramework.js\\\\E2E Ecommerce test -- Verification of E2E Positive flow (failed) (attempt 2).png\"\n      ]\n    ]\n  }\n]",
+              "code": "before(function () {\n  cy.fixture('example').then(function (data) {\n    this.inputdata = testData;\n    this.homepage = new _HomePage[\"default\"]();\n  });\n});\n//HomePage\n//const homepage = new HomePage() - declared in before\nhomepage.inputdata = testData;\nhomepage.NavigateTo(URL);\n//ProductPage\nvar productPage = homepage.login(testData.username, testData.password);\nproductPage.inputdata = testData;\nproductPage.pageValidation();\nproductPage.VerifyHeader();\nproductPage.SelectProducts();\n// select products and get CartPage instance\nvar CartPage = productPage.GotoCart();\nCartPage.inputdata = testData;\nCartPage.UpdateCart();\nCartPage.VerifyQuantity();\nCartPage.VerifyTotalCost();\n//ConfirmationPage\nvar confirmationPage = CartPage.Checkout();\nconfirmationPage.inputdata = testData;\nconfirmationPage.CountryValidation();\nconfirmationPage.PurchaseValidation();",
+              "err": {
+                "message": "CypressError: Cypress detected you registered a(n) `beforeAll` hook while a test was running (possibly a hook nested inside another hook). All hooks must be registered before a test begins executing.\n\nMove the `beforeAll` into a suite callback or the global scope.",
+                "estack": "CypressError: Cypress detected you registered a(n) `beforeAll` hook while a test was running (possibly a hook nested inside another hook). All hooks must be registered before a test begins executing.\n\nMove the `beforeAll` into a suite callback or the global scope.\n    at cypressErr (http://localhost:57326/__cypress/runner/cypress_runner.js:76065:18)\n    at Object.errByPath (http://localhost:57326/__cypress/runner/cypress_runner.js:76119:10)\n    at Suite._createHook (http://localhost:57326/__cypress/runner/cypress_runner.js:145637:76)\n    at Suite._createHook (http://localhost:57326/__cypress/runner/cypress_runner.js:145629:34)\n    at Suite.beforeAll (http://localhost:57326/__cypress/runner/cypress_runner.js:157344:19)\n    at Suite.<computed> [as beforeAll] (http://localhost:57326/__cypress/runner/cypress_runner.js:145645:23)\n    at before (http://localhost:57326/__cypress/runner/cypress_runner.js:160806:17)\nFrom Your Spec Code:\n    at Context.eval (cypress/e2e/examples/E2EFramework.js:17:8)",
+                "diff": null
+              },
+              "uuid": "d0de36aa-03d1-4a02-9876-be0dded5db39",
+              "parentUUID": "f36de00d-f445-4fe8-b0a2-09a8f4b45259",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "d0de36aa-03d1-4a02-9876-be0dded5db39"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 275,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

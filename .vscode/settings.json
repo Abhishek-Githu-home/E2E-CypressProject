@@ -1,0 +1,9 @@
+{
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "editor.aiStats.enabled": false,
+    "github.copilot.chat.alternateGptPrompt.enabled": true,
+    "github.copilot.chat.alternateGeminiModelFPrompt.enabled": true,
+    "github.copilot.chat.anthropic.tools.websearch.enabled": true,
+    "github.copilot.chat.codesearch.enabled": true,
+    "github.copilot.chat.customAgents.showOrganizationAndEnterpriseAgents": true
+}
