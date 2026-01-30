@@ -1,6 +1,6 @@
 // Frames in cypress
-/// <reference types="cypress" />
-/// <reference types="cypress-iframe" />
+// <reference types="cypress" />
+// <reference types="cypress-iframe" />
 
 
 import 'cypress-iframe';
@@ -12,7 +12,7 @@ describe('Handling the frames', () => {
         cy.frameLoaded('#courses-iframe')
 
         //cy.iframe().find('a[href="/mentorship"]').click({multiple:true})
-        cy.iframe().find('a[href="/mentorship"]').eq(0).click()
+        cy.iframe().find('a[href="/mentorship"]').eq(0).click({timeout : 6000})
 
        //  cy.iframe().find('input[placeholder="Enter your name"]').eq(0).type("testing")
        //  cy.iframe().find('#email').type('test@gmail.com')

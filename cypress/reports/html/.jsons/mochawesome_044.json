@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2026-01-30T17:09:43.834Z",
+    "end": "2026-01-30T17:10:20.995Z",
+    "duration": 37161,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f0f60d94-455d-430e-af0a-2856a7588116",
+      "title": "",
+      "fullFile": "cypress\\e2e\\examples\\Test7 - FileDownload.js",
+      "file": "cypress\\e2e\\examples\\Test7 - FileDownload.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "54b7a8f1-cbb6-4bde-b3d1-b10373eae2a7",
+          "title": "Download file functionality",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify user able to download the csv file",
+              "fullTitle": "Download file functionality Verify user able to download the csv file",
+              "timedOut": null,
+              "duration": 17071,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\examples\\\\Test7 - FileDownload.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\examples\\\\Test7 - FileDownload.js\\\\Download file functionality -- Verify user able to download the csv file (failed).png\"\n      ],\n      [\n        \"\\\\examples\\\\Test7 - FileDownload.js\\\\Download file functionality -- Verify user able to download the csv file (failed) (attempt 2).png\"\n      ]\n    ]\n  }\n]",
+              "code": "cy.visit(URL);\ncy.get('input[formcontrolname=\"userEmail\"]').type(\"abhiapitest@gmail.com\");\ncy.get('input[formcontrolname=\"userPassword\"]').type('Pas@12345');\ncy.get('#login').click();\ncy.get('.fa-shopping-cart').eq(1).click();\ncy.get('.fa-shopping-cart').eq(2).click();\ncy.get('button[routerlink=\"/dashboard/cart\"]').click();\ncy.get('.value').eq(1).should('have.text', '$1200');\ncy.get('.btn-primary').contains('Checkout').click();\ncy.get('input[class=\"input txt\"]').eq(1).type(\"Abhishek K M\");\ncy.get('input[name=\"coupon\"]').type(\"ABHI80%\");\ncy.get('button[type=\"submit\"]').contains(\"Apply Coupon\").click();\ncy.get('label[type=\"text\"]').should('have.text', 'abhiapitest@gmail.com');\ncy.get('input[placeholder=\"Select Country\"]').type(\"India\");\ncy.get('.list-group-item').each(function ($country) {\n  var selectCountry = $country.text().trim(); //The .trim() method removes whitespace from both the start and the end of a string.\n  if (selectCountry == \"India\") {\n    cy.wrap($country).click();\n  }\n});\n//cy.wait(2000)\ncy.get('.action__submit').contains(\"Place Order\").click();\ncy.get('.btn-primary').contains('Click To Download Order Details in CSV').click({\n  timeout: 6000\n});\ncy.readFile(\"cypress/downloads/order-invoice_abhiapitest.csv\").should('exist');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 6000ms: `cy.readFile(\"cypress/downloads/order-invoice_abhiapitest.csv\")` failed because the file does not exist at the following path:\n\n`C:\\Users\\abhis\\CypressAutomation\\cypress\\downloads\\order-invoice_abhiapitest.csv`\n\nhttps://on.cypress.io/readfile",
+                "estack": "AssertionError: Timed out retrying after 6000ms: `cy.readFile(\"cypress/downloads/order-invoice_abhiapitest.csv\")` failed because the file does not exist at the following path:\n\n`C:\\Users\\abhis\\CypressAutomation\\cypress\\downloads\\order-invoice_abhiapitest.csv`\n\nhttps://on.cypress.io/readfile\n    at Context.eval (cypress/e2e/examples/Test7 - FileDownload.js:39:71)",
+                "diff": null
+              },
+              "uuid": "f9674936-4ff8-4587-9c3e-c66b8390b801",
+              "parentUUID": "54b7a8f1-cbb6-4bde-b3d1-b10373eae2a7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f9674936-4ff8-4587-9c3e-c66b8390b801"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 17071,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

@@ -35,7 +35,7 @@ describe('Download file functionality', () => {
         //cy.wait(2000)
         cy.get('.action__submit').contains("Place Order").click()
 
-        cy.get('.btn-primary').contains('Click To Download Order Details in CSV').click()
+        cy.get('.btn-primary').contains('Click To Download Order Details in CSV').click({timeout : 6000})
         cy.readFile("cypress/downloads/order-invoice_abhiapitest.csv").should('exist')
     })
 })

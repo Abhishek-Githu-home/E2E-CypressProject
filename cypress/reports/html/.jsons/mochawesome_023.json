@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-01-30T16:11:16.256Z",
+    "end": "2026-01-30T16:11:27.053Z",
+    "duration": 10797,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8c11b894-f7b8-460c-90e6-9cadf19e39a0",
+      "title": "",
+      "fullFile": "cypress\\e2e\\examples\\Test2 - Dropdown, Button, Alerts.js",
+      "file": "cypress\\e2e\\examples\\Test2 - Dropdown, Button, Alerts.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "67b3f8ab-237a-465a-9e3b-456aaec551a4",
+          "title": "This is second testcase",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verification of dropdown, checkbox",
+              "fullTitle": "This is second testcase Verification of dropdown, checkbox",
+              "timedOut": null,
+              "duration": 7236,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\examples\\\\Test2 - Dropdown, Button, Alerts.js\"\n}",
+              "code": "cy.visit('https://rahulshettyacademy.com/AutomationPractice/').then(function (text) {\n  cy.log(\"Opened Automation practice page\");\n});\ncy.get('a.blinkingText:visible').then(function ($text) {\n  var logo = $text.text();\n  cy.log(\"The blinking header is \" + logo);\n});\ncy.contains('Practice Page').then(function ($text) {\n  var title = $text.text();\n  cy.log(\"The title is \" + title);\n});\ncy.contains('Radio Button Example').then(function ($text) {\n  var Radioheader = $text.text();\n  cy.log(\"The Radio button title is \" + Radioheader);\n  cy.get('input[value=\"radio2\"]').then(function (Radio) {\n    cy.log(Radio.click() + \" 2nd Radio button is clicked\");\n    cy.get('input[value=\"radio3\"]').then(function (Radio) {\n      cy.log(Radio.click() + \"3rd Radio button is clicked\");\n    });\n  });\n  // Type and select from dynamic dropdown\n  // => This is fat pipe, helps to resolve the promises\n  cy.get('input[id=\"autocomplete\"]').type(\"India\");\n  cy.get('.ui-menu-item-wrapper').each(function ($country) {\n    if ($country.text() === 'India') $country.click();\n  });\n  cy.get('input[id=\"autocomplete\"]').should('have.value', 'India');\n  //Selecting the static dropdown and assertion\n  cy.get('select[name=\"dropdown-class-example\"]').select('Option2').should('have.value', 'option2');\n  //Checking the checkbox and assertion\n  cy.get('input[type=\"checkBox\"]').check(['option1', 'option2', 'option3']).should('be.checked');\n  //Unchecking the checkbox and assertion\n  cy.get('input[type=\"checkbox\"]').uncheck(['option2']).should('not.be.checked');\n  // Handling show/hide textbox and assertions\n  cy.get('input[value=\"Show\"]').click();\n  cy.get('input[placeholder=\"Hide/Show Example\"]').then(function (Textbox) {\n    cy.get(Textbox).should('be.visible');\n    cy.get(Textbox).type('Abhishek');\n    cy.get(Textbox).should('have.value', 'Abhishek');\n  });\n  cy.get('input[value=\"Hide\"]').click();\n  cy.get('input[placeholder=\"Hide/Show Example\"]').should('not.be.visible');\n  cy.get('#show-textbox').click();\n});\n//Handling alert\n//Cypress have the capability of browser events. window:alert() is the event which get fired on alert open.\n// so we are are firing the event through cypress to get access to the alert\ncy.get('#alertbtn').click();\ncy.get('#confirmbtn').click();\ncy.on('window:alert', function (str) {\n  //Mocha\n  expect(str).to.equal(\"Hello , share this practice page and share your knowledge\");\n});\ncy.on('window:confirm', function (str) {\n  //Mocha\n  expect(str).to.equal(\"Hello , Are you sure you want to confirm?\");\n});",
+              "err": {},
+              "uuid": "19225cc9-8208-4dd3-8df1-c99bdba54d6a",
+              "parentUUID": "67b3f8ab-237a-465a-9e3b-456aaec551a4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "19225cc9-8208-4dd3-8df1-c99bdba54d6a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7236,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

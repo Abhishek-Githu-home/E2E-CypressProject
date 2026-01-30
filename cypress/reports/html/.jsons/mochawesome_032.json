@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-01-30T17:05:56.227Z",
+    "end": "2026-01-30T17:05:59.161Z",
+    "duration": 2934,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fb8a6ef2-7e3d-4173-82f6-6f534cce6b36",
+      "title": "",
+      "fullFile": "cypress\\e2e\\ApiTesting\\Test11 - MockApi.js",
+      "file": "cypress\\e2e\\ApiTesting\\Test11 - MockApi.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3ade40ef-159f-458c-8ccf-42e0bc7c5a8a",
+          "title": "Managing the API",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Altering the API Response",
+              "fullTitle": "Managing the API Altering the API Response",
+              "timedOut": null,
+              "duration": 747,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\ApiTesting\\\\Test11 - MockApi.js\"\n}",
+              "code": "cy.visit(\"https://rahulshettyacademy.com/angularAppdemo/\");\ncy.get('.display-3').should('have.text', 'Rahul Shetty Academy');\n//cy.intercept('GET', '/users').as('getAllUsers')\ncy.intercept({\n  method: 'GET',\n  url: \"https://rahulshettyacademy.com/Library/GetBook.php?AuthorName=shetty\"\n}, {\n  statusCode: 200,\n  body: [{\n    //Alter the response with body\n    \"aisle\": \"2303\",\n    \"book_name\": \"RestAssured with Java\",\n    \"isbn\": \"LSA\"\n  }, {\n    \"aisle\": \"2303\",\n    \"book_name\": \"Abhi Authored Book\",\n    \"isbn\": \"Cypress\"\n  }]\n}).as('BookRetrivialAPI');\ncy.get('.btn-primary').contains('Virtual Library').click();\ncy.wait('@BookRetrivialAPI').then(function (_ref) {\n  var request = _ref.request,\n    response = _ref.response;\n  cy.get('tr').should('have.length', response.body.length + 1);\n});\n// if body with one response go with  \n//cy.get('p').should('have.text', 'Oops only 1 Book available')\ncy.get('p').should('have.not', 'Oops only 1 Book available');\n//length of the rows array = rows of the table",
+              "err": {},
+              "uuid": "36afd801-604f-4f4d-9eb8-d156a8b5393a",
+              "parentUUID": "3ade40ef-159f-458c-8ccf-42e0bc7c5a8a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "36afd801-604f-4f4d-9eb8-d156a8b5393a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 747,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

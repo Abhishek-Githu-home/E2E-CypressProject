@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-01-30T17:05:42.402Z",
+    "end": "2026-01-30T17:05:46.524Z",
+    "duration": 4122,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b145ff59-3b0c-4105-928a-cfa8d8bbe23d",
+      "title": "",
+      "fullFile": "cypress\\e2e\\ApiTesting\\Test10 - FakeApi.js",
+      "file": "cypress\\e2e\\ApiTesting\\Test10 - FakeApi.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ea1528cb-76ad-46c6-9516-34f4897fc049",
+          "title": "Verify the Authorization",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validation",
+              "fullTitle": "Verify the Authorization Validation",
+              "timedOut": null,
+              "duration": 1537,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\ApiTesting\\\\Test10 - FakeApi.js\"\n}",
+              "code": "cy.visit('https://rahulshettyacademy.com/angularAppdemo/');\ncy.intercept('GET', 'https://rahulshettyacademy.com/Library/GetBook.php?AuthorName=shetty', function (req) {\n  req.url = \"https://rahulshettyacademy.com/Library/GetBook.php?AuthorName=Abhishek\";\n  req[\"continue\"](function (res) {\n    expect(res.url).to.equal(\"https://rahulshettyacademy.com/Library/GetBook.php?AuthorName=Abhishek\");\n    //expect(res.statusCode).to.equal(403)\n  });\n}).as('ValidationResponse');\ncy.get('.btn-primary').contains('Virtual Library').click();\ncy.wait('@ValidationResponse');",
+              "err": {},
+              "uuid": "c19d3da8-9805-4e05-abfa-41e2a57d59fe",
+              "parentUUID": "ea1528cb-76ad-46c6-9516-34f4897fc049",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c19d3da8-9805-4e05-abfa-41e2a57d59fe"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1537,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

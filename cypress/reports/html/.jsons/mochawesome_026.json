@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2026-01-30T16:12:35.265Z",
+    "end": "2026-01-30T16:12:46.130Z",
+    "duration": 10865,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "31d44e4e-d9cf-4768-983a-b612d06263e0",
+      "title": "",
+      "fullFile": "cypress\\e2e\\examples\\Test5 - iframe.js",
+      "file": "cypress\\e2e\\examples\\Test5 - iframe.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9c18164d-ed29-46cd-9562-028b5904ba8c",
+          "title": "Handling the frames",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Frame in Automation practice site",
+              "fullTitle": "Handling the frames Frame in Automation practice site",
+              "timedOut": null,
+              "duration": 2164,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": "[\n  {\n    \"title\": \"cypress-mochawesome-reporter-videos-failed\",\n    \"value\": \"cypress\\\\e2e\\\\examples\\\\Test5 - iframe.js\"\n  },\n  {\n    \"title\": \"cypress-mochawesome-reporter-screenshots\",\n    \"value\": [\n      [\n        \"\\\\examples\\\\Test5 - iframe.js\\\\Handling the frames -- Frame in Automation practice site (failed).png\"\n      ],\n      [\n        \"\\\\examples\\\\Test5 - iframe.js\\\\Handling the frames -- Frame in Automation practice site (failed) (attempt 2).png\"\n      ]\n    ]\n  }\n]",
+              "code": "cy.visit(\"https://rahulshettyacademy.com/AutomationPractice/\");\ncy.frameLoaded('#courses-iframe');\n//cy.iframe().find('a[href=\"/mentorship\"]').click({multiple:true})\ncy.iframe().find('a[href=\"/mentorship\"]').eq(0).click();\n//  cy.iframe().find('input[placeholder=\"Enter your name\"]').eq(0).type(\"testing\")\n//  cy.iframe().find('#email').type('test@gmail.com')\n//  cy.iframe().find('button[type=\"submit\"]').click()\ncy.iframe().find('a[href*=\"https://courses.rahulshettyacademy.com/p/mentorship-rahul-shetty\"]').eq(0).click();\ncy.iframe().visit(\"https://courses.rahulshettyacademy.com/p/mentorship-rahul-shetty\");\ncy.origin('https://courses.rahulshettyacademy.com', function () {\n  cy.get('.register-btn').eq(0).click();\n});",
+              "err": {
+                "message": "Error: cypress-iframe commands can only be applied to exactly one iframe at a time.  Instead found 2",
+                "estack": "Error: cypress-iframe commands can only be applied to exactly one iframe at a time.  Instead found 2\n    at Object.eval (node_modules/cypress-iframe/dist/index.js:87:0)\n    at step (node_modules/cypress-iframe/dist/index.js:43:0)\n    at Object.eval [as next] (node_modules/cypress-iframe/dist/index.js:24:0)\n    at eval (node_modules/cypress-iframe/dist/index.js:18:0)\n    at new Promise (<anonymous>)\n    at __awaiter (node_modules/cypress-iframe/dist/index.js:14:0)\n    at Context.eval (node_modules/cypress-iframe/dist/index.js:79:0)",
+                "diff": null
+              },
+              "uuid": "d2d4942e-b071-4fea-985b-4794a0215cba",
+              "parentUUID": "9c18164d-ed29-46cd-9562-028b5904ba8c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "d2d4942e-b071-4fea-985b-4794a0215cba"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 2164,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}

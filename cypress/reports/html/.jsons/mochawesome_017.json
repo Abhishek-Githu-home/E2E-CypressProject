@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-01-30T16:08:33.564Z",
+    "end": "2026-01-30T16:08:39.535Z",
+    "duration": 5971,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9fc28166-cd37-4e29-a424-67ad6ba21783",
+      "title": "",
+      "fullFile": "cypress\\e2e\\ApiTesting\\Test12 - TestAPI.js",
+      "file": "cypress\\e2e\\ApiTesting\\Test12 - TestAPI.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ac644c91-6960-4fbd-bb59-957cc3f5eeca",
+          "title": "Hitting URL",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "API Testing with output",
+              "fullTitle": "Hitting URL API Testing with output",
+              "timedOut": null,
+              "duration": 5835,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "{\n  \"title\": \"cypress-mochawesome-reporter-videos-passed\",\n  \"value\": \"cypress\\\\e2e\\\\ApiTesting\\\\Test12 - TestAPI.js\"\n}",
+              "code": "cy.request('GET', 'https://openlibrary.org/books/OL59574246M/Legends_Lattes').then(function (response) {\n  expect(response.isOkStatusCode);\n  expect(response.status).to.equal(200);\n});\ncy.request('POST', 'http://216.10.245.166/Library/Addbook.php', {\n  \"name\": \"Learn Appium Automation with Java\",\n  \"statusmessage\": \"Lovely\"\n}).then(function (res) {\n  expect(res.status).to.equal(200);\n});\ncy.request('POST', 'https://fake-json-api.mock.beeceptor.com/companies', {\n  \"content-type\": \"application json\"\n}).then(function (result) {\n  expect(result.body).to.equal(\"Hey ya! Great to see you here. Btw, nothing is configured for this request path. Create a rule and start building a mock API.\");\n});\ncy.request(\"POST\", \"https://rahulshettyacademy.com/api/ecom/auth/login\", {\n  \"userEmail\": \"abhiapitest@gmail.com\",\n  \"userPassword\": \"Pas@12345\"\n}).then(function (login) {\n  expect(login.status).to.equal(200);\n  //expect(login.body).should(\"have.text\", \"Login Successfully\");            \n});",
+              "err": {},
+              "uuid": "a39834d5-d2ca-4b55-8ca3-ca0ea4a8f6e6",
+              "parentUUID": "ac644c91-6960-4fbd-bb59-957cc3f5eeca",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a39834d5-d2ca-4b55-8ca3-ca0ea4a8f6e6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5835,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "reportDir": "cypress\\reports\\html\\.jsons"
+      },
+      "version": "6.3.2"
+    }
+  }
+}
