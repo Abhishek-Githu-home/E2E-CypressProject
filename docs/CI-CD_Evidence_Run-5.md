@@ -1,104 +1,131 @@
 # CI/CD Evidence Report — Cypress Run 5
 
-Project: gtiq5x
-Run ID: 5
-Dashboard run URL: https://cloud.cypress.io/projects/gtiq5x/runs/5/test-results?actions=%5B%5D&browsers=%5B%5D&groups=%5B%5D&isFlaky=%5B%5D&modificationDateRange=%7B%22startDate%22%3A%221970-01-01%22%2C%22endDate%22%3A%222038-01-19%22%7D&orderBy=EXECUTION_ORDER&oses=%5B%5D&specs=%5B%5D&statuses=%5B%5D&testingTypesEnum=%5B%5D
+[![View Run](https://img.shields.io/badge/View%20Run-Cypress-blue?style=for-the-badge)](https://cloud.cypress.io/projects/gtiq5x/runs/5)
 
-Summary:
-- Date range covered in analysis: 2026-01-24 — 2026-01-31
-- Total runs (30–31 Jan): 2 (both on 2026-01-30)
-- Failures: 2 (100% failure rate for the day)
-- Total specs executed (unique): 15
-- Total tests counted: 17
-- Median run time (2026-01-30): 372.1s
+[![Test Results](https://img.shields.io/badge/Test%20Results-Dashboard-brightgreen?style=for-the-badge)](https://cloud.cypress.io/projects/gtiq5x/runs/5/test-results?actions=%5B%5D&browsers=%5B%5D&groups=%5B%5D&isFlaky=%5B%5D&modificationDateRange=%7B%22startDate%22%3A%221970-01-01%22%2C%22endDate%22%3A%222038-01-19%22%7D&orderBy=EXECUTION_ORDER&oses=%5B%5D&specs=%5B%5D&statuses=%5B%5D&testingTypesEnum=%5B%5D)
 
-Key findings:
-- High failure rate: 100% (2/2 runs failed).
-- Most common errors are assertion/timeouts and file-not-found for downloaded CSVs.
-- Several specs are consistently failing (listed in Top Failures).
-- Some tests are slow (notably FileDownload and BDD ecommerce feature).
+[![Specs List](https://img.shields.io/badge/Specs-List-red?style=for-the-badge)](https://cloud.cypress.io/projects/gtiq5x/runs/5/specs)
 
-Most common errors (counts):
-- AssertionError: Timed out retrying after 6000ms: Expected to find content: 'Home' within the element: <a> but never did. — impacted_tests: 6
-- AssertionError: cy.readFile(...) failed because the file does not exist at path — impacted_tests: 4
-- Cypress detected registration of beforeAll while a test was running — impacted_tests: 4
-- Global registry error (cucumber preprocessor / support/e2e.js) — impacted_tests: 4
-- cypress-iframe applied to 2 iframes instead of exactly one — impacted_tests: 4
+---
 
-Slowest specs (median durations):
-- cypress/e2e/examples/Test7 - FileDownload.js — 00:35
-- cypress/e2e/BDD/ecommerce.feature (outline) — 00:21
-- cypress/e2e/BDD/ecommerce.feature — 00:21
-- cypress/e2e/examples/Test3 - Window Handling.js — 00:19
-(see Appendix A for full slowest-tests list)
+## Overall Run-Report metadata
 
-Top failing specs:
-- cypress/e2e/BDD/ecommerce.feature (Outline) — 2 runs, failure_rate 1
-- cypress/e2e/examples/Test7 - FileDownload.js — 2 runs, failure_rate 1
-- cypress/e2e/BDD/ecommerce/ecommStepDef.js — 2 runs, failure_rate 1
-- cypress/e2e/examples/Test5 - iframe.js — 2 runs, failure_rate 1
-- cypress/e2e/examples/Test9 - E2EFramework.js — 2 runs, failure_rate 1
+- Project Name: **E2E-Cypress Project**
+- Project ID: **gtiq5x** 
+- Runtime Date: **2026-01-31**  
 
-Per-spec analysis and probable root causes:
-- cypress/e2e/examples/Test7 - FileDownload.js
-  - Symptom: ReadFile missing file error (order-invoice_abhiapitest.csv not found). Also slow (median 35s).
-  - Probable causes:
-    - File download did not complete before readFile attempted. Tests may assume immediate availability.
-    - Wrong downloads folder configuration in CI runner (download path differs from local dev).
-    - Test relies on deterministic filename but CI run produced different name or no download.
-  - Recommended fixes:
-    - Ensure downloads folder exists in CI and is cleaned before run.
-    - Use cy.wait or poll for file presence with a longer timeout, or use cy.task to move/download file on the node side.
-    - Validate that browser download permissions/behavior in headless CI are configured (set browser download directory via Cypress config or use a plugin).
 
-- cypress/e2e/BDD/ecommerce.feature and ecommStepDef.js
-  - Symptom: Uncaught error outside test and/or hooks registered at runtime (beforeAll registered while a test was running). Global registry error mentioned for cucumber preprocessor.
-  - Probable causes:
-    - Step definitions or hooks are being registered dynamically (inside a test or in support/e2e.js) causing the cucumber preprocessor to complain.
-    - Using beforeAll inside test or inside steps rather than top-level suite scope.
-    - A support file (support/e2e.js) contains cucumber step/register calls that should be in a proper location.
-  - Recommended fixes:
-    - Move any beforeAll into describe-level hooks or the global scope prior to tests running.
-    - Ensure cucumber step definitions are placed in cypress/e2e/BDD and not in support files that run after tests start.
-    - Upgrade cucumber preprocessor to a compatible version and check its docs for registry usage.
-
-- cypress/e2e/examples/Test5 - iframe.js
-  - Symptom: cypress-iframe commands applied to 2 iframes; expected exactly one.
-  - Probable causes:
-    - Target page contains multiple iframes matching the selector.
-    - Selector is not specific enough.
-  - Recommended fixes:
-    - Refine the iframe selector to target a single iframe (use index or unique attribute).
-    - Assert the number of matched iframes before applying plugin commands and handle accordingly.
-
-- cypress/e2e/examples/Test9 - E2EFramework.js
-  - Symptom: Generic E2E test failing; included in top failures.
-  - Probable causes:
-    - Could be related to navigation/assertion timing (e.g., 'Home' not found) or other environment differences.
-  - Recommended fixes:
-    - Add more robust selectors and retry logic; increase command timeouts where necessary.
-
-Artifacts and evidence links:
-- Dashboard run overview: https://cloud.cypress.io/projects/gtiq5x/runs/5
-- Test results with filters: https://cloud.cypress.io/projects/gtiq5x/runs/5/test-results?actions=%5B%5D&browsers=%5B%5D&groups=%5B%5D&isFlaky=%5B%5D&modificationDateRange=%7B%22startDate%22%3A%221970-01-01%22%2C%22endDate%22%3A%222038-01-19%22%7D&orderBy=EXECUTION_ORDER&oses=%5B%5D&specs=%5B%5D&statuses=%5B%5D&testingTypesEnum=%5B%5D
-- Specs list: https://cloud.cypress.io/projects/gtiq5x/runs/5/specs
+## Artifacts and evidence links:
+- **Dashboard run overview**: https://cloud.cypress.io/projects/gtiq5x/runs/5
+- **Detailed analytic run results**: https://cloud.cypress.io/projects/gtiq5x/runs/5/test-results?actions=%5B%5D&browsers=%5B%5D&groups=%5B%5D&isFlaky=%5B%5D&modificationDateRange=%7B%22startDate%22%3A%221970-01-01%22%2C%22endDate%22%3A%222038-01-19%22%7D&orderBy=EXECUTION_ORDER&oses=%5B%5D&specs=%5B%5D&statuses=%5B%5D&testingTypesEnum=%5B%5D
+- **Specs list**: https://cloud.cypress.io/projects/gtiq5x/runs/5/specs
 - Use the Cypress Dashboard UI to download raw JSON export for run 5 (requires record key/permissions).
+---
 
-Recommendations (short- and medium-term):
-1. Stabilize downloads tests (Test7): standardize download path in CI, wait for file, or stub network responses.
-2. Fix cucumber registration and hook placement: search for beforeAll usages and move them to top-level suites.
-3. Make iframe selectors specific and assert count before plugin usage.
-4. Add targeted retries or increase timeouts for fragile assertions; do not globally increase timeouts without addressing root cause.
-5. Improve CI parallelization: current median concurrency is 1 and no parallel savings — consider splitting specs into groups to reduce wall-clock time.
-6. Add a smoke gate job to fail fast for environment issues (e.g., missing download permission).
+## Summary (2026-01-30)
+| Metric | Value |
+|---|---:|
+| Total runs | 02 |
+| Unique specs executed | 15 |
+| Total tests counted | 17 |
+| Passed Count | 10 |
+| Failed Count | 05 |
+| Median run time | 372.1 s |
 
-Action items and owners (suggested):
-- QA: Update Test7 to poll for downloaded file and add CI-specific config. (2–4h)
-- Dev: Review and fix beforeAll registration in BDD steps/support (1–3h)
-- QA: Refine iframe selectors in Test5 (0.5–1h)
-- CI Admin: Ensure CI VM allows browser downloads and that artifacts are collected (1–2h)
+---
 
-Appendix A — slowest-tests CSV
+## Test outcome
+Passed: 10 • Failed: 05
+
+🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 🟥🟥🟥🟥🟥  
+(10 green squares = passed, 5 red squares = failed)
+
+## Pass rate: 58.8% (10/17) 
+
+Note: Intentionally failed the cases for analytic purpose and dashboard-level failure rate for the day shows 100% of runs failed; tests distribution above is per-tests-count.
+
+---
+
+## Key findings (short)
+- Very high pipeline instability: both runs on 2026-01-30 failed.
+- Most common failures are assertion/timeouts, missing downloaded CSV files, and test-hook/registry errors with the cucumber preprocessor.
+- Several specs are repeat offenders (Top failing specs below).
+- File-download tests are both slow and fragile — candidate for immediate remediation.
+
+---
+
+## Most common errors (impact)
+| Error summary | Impacted tests |
+|---|---:|
+| AssertionError — 'Home' not found (timed out) | 6 |
+| cy.readFile missing download (order-invoice_abhiapitest.csv) | 4 |
+| Cypress detected beforeAll registered while a test was running | 4 |
+| Global registry error (cucumber preprocessor, support/e2e.js) | 4 |
+| cypress-iframe matched multiple iframes (expected 1) | 4 |
+
+---
+
+## Slowest specs (median durations)
+- cypress/e2e/examples/Test7 - FileDownload.js — 00:35  
+- cypress/e2e/BDD/ecommerce.feature (outline) — 00:21  
+- cypress/e2e/BDD/ecommerce.feature — 00:21  
+- cypress/e2e/examples/Test3 - Window Handling.js — 00:19
+
+(Full list in Appendix A)
+
+---
+
+## Top failing specs
+1. cypress/e2e/BDD/ecommerce.feature (Outline) — 2 runs, failure_rate 1  
+2. cypress/e2e/examples/Test7 - FileDownload.js — 2 runs, failure_rate 1  
+3. cypress/e2e/BDD/ecommerce/ecommStepDef.js — 2 runs, failure_rate 1  
+4. cypress/e2e/examples/Test5 - iframe.js — 2 runs, failure_rate 1  
+5. cypress/e2e/examples/Test9 - E2EFramework.js — 2 runs, failure_rate 1
+
+---
+
+## Per-spec quick analysis & recommended fixes
+
+- Test7 — FileDownload.js  
+  - Symptom: cy.readFile fails as downloaded CSV not found; test is slow.  
+  - Likely causes: download did not complete before read, wrong download path in CI, or browser headless download behavior.  
+  - Fixes: ensure CI download dir exists and is cleaned; poll for file with retry and timeout; consider using cy.task to perform server-side file checks; or stub network/download.
+
+- BDD ecommerce (feature & ecommStepDef.js)  
+  - Symptom: uncaught error outside tests & "beforeAll registered while a test was running"; cucumber global registry error.  
+  - Likely causes: step/hook registration being run at an unexpected time (support files or dynamic registration).  
+  - Fixes: move beforeAll to top-level suite or global setup before tests run; ensure step definitions live in proper folder (not in support/e2e.js that runs after runner starts); verify cucumber preprocessor version.
+
+- iframe tests (Test5)  
+  - Symptom: cypress-iframe commands applied while selector matched 2 iframes.  
+  - Fixes: use a unique iframe selector or index; assert iframe count before applying plugin; make selectors robust.
+
+- General flaky navigation/assertion failures  
+  - Fixes: increase targeted timeouts only where necessary; prefer robust selectors and waiting patterns (cy.findBy/contains with scope); add network stubbing for external dependencies.
+
+---
+
+## Recommendations (priority)
+1. Fix FileDownload tests (CI download path + polling) — high priority.  
+2. Fix BDD hook/registry issues (move beforeAll, review support files) — high priority.  
+3. Make iframe selectors specific; assert counts — medium.  
+4. Add a smoke/gate job to validate environment (downloads, browser flags) before full run — medium.  
+5. Consider splitting specs into groups to enable parallelization and reduce wall time — medium.  
+6. Collect screenshots/videos and raw JSON artifacts after fixes to confirm remediation — low/medium.
+
+---
+
+## Action items (owners, rough estimate)
+- QA: Update FileDownload test for CI downloads & polling (2–4h)  
+- Dev: Review BDD hooks/step definition placement and fix beforeAll issues (1–3h)  
+- QA: Update iframe selectors and add pre-checks (0.5–1h)  
+- CI Admin: Ensure browser downloads are allowed & artifacts are collected (1–2h)
+
+---
+
+## Appendices
+
+#### Appendix A — slowest-tests CSV
 ```csv
 spec_path,title,total_results,median_duration
 cypress/e2e/examples/Test7 - FileDownload.js,Download file functionality /// Verify user able to download the csv file,2,00:35
@@ -120,7 +147,7 @@ cypress/e2e/BDD/ecommerce/ecommStepDef.js,An uncaught error was detected outside
 cypress/e2e/examples/CheckSanity.js,Checking the sanity /// should pass if the environment is clean,2,161ms
 ```
 
-Appendix B — most-common-errors CSV
+#### Appendix B — most-common-errors CSV
 ```csv
 error_name,error_message,impacted_tests
 AssertionError,Timed out retrying after 6000ms: Expected to find content: 'Home' within the element: <a> but never did.,6
@@ -144,7 +171,7 @@ We dynamically generated a new test to display this failure.",4
 Error,cypress-iframe commands can only be applied to exactly one iframe at a time.  Instead found 2,4
 ```
 
-Appendix C — top-failures CSV
+#### Appendix C — top-failures CSV
 ```csv
 spec_path,title,last_failure_seen_at,last_failure_runs_ago,total_results,failure_rate
 cypress/e2e/BDD/ecommerce.feature,End to End Ecommerce Validation /// Ecommerce Products delivery with Outline(cucumber driven),2026-01-30T17:05:28.571Z,0,2,1
@@ -155,28 +182,6 @@ cypress/e2e/examples/Test9 - E2EFramework.js,E2E Ecommerce test /// Verification
 cypress/e2e/BDD/ecommerce.feature,End to End Ecommerce Validation /// Ecommerce Products delivery,2026-01-30T16:07:40.131Z,1,2,0.5
 ```
 
-Appendix D — test-suite-size CSV
-```csv
-date,total_tests,total_specs,total_runs,failure_rate
-2026-01-30,17,15,2,1.00
-```
+---
 
-Appendix E — run-duration CSV
-```csv
-date,average_runtime,median_concurrency,parallelization_savings,total_runs,failure_rate
-2026-01-30,372.088,1,0,2,1.00
-2026-01-31,,,0,0,0
-```
-
-Appendix F — runs-over-time CSV
-```csv
-date,total,failed,running,errored,passed,no_tests,over_limit,timed_out,cancelled,failure_rate
-date,total,failed,running,errored,passed,no_tests,over_limit,timed_out,cancelled,failure_rate
-2026-01-30,2,2,0,0,0,0,0,0,0,1.00
-2026-01-31,0,0,0,0,0,0,0,0,0,0
-```
-
-Conclusion:
-This run (5) shows systemic instability in the suite for the analysed date range. Prioritizing the file-download test fixes, cucumber hook placement fixes, and iframe selector corrections will significantly reduce failures. After fixes, re-run with parallelization gating and artifact collection enabled to gather evidence (screenshots/videos) for each fix.
-
-Report prepared by: GitHub Copilot (automated analysis) on 2026-01-31.
+Report prepared by: **Abhishek** using GitHub Copilot (Automated analysis) — 2026-01-31
