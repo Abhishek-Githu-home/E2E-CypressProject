@@ -3,6 +3,8 @@
 
 End-to-end (E2E) test suite using Cypress for automated browser testing of the application. This repository contains Cypress tests, fixtures, utilities, and configuration to run tests locally and in CI (headless and headed). The project is organized for clarity and scalability and includes recommended scripts and reporting.
 
+## CI-CD Run results are available in Doc folder
+
 ## Table of contents
 - [Project overview](#project-overview)
 - [Key features](#key-features)
