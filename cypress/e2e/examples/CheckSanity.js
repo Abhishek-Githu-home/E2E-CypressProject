@@ -5,4 +5,10 @@ describe('Checking the sanity', () => {
   it('should pass if the environment is clean', () => {
     expect(true).to.be.true;
   });
+
+  it('should pass if the environment is clean', () => {
+    expect(true).to.be.true;
+  })
+
 });
+
