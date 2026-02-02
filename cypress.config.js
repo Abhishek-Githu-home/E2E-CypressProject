@@ -16,7 +16,7 @@ async function setupNodeEvents(on, config) { //await and async comes as package,
 
 module.exports = defineConfig({
   defaultCommandTimeout : 6000,
-  video : true,
+  video : false,
   reporter : 'cypress-mochawesome-reporter', //This will configure the mochawesome reporter
 
   env: {
