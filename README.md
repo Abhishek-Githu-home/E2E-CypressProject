@@ -178,14 +178,3 @@ Example (GitHub Actions) outline:
 3. Add tests and update docs
 4. Open a pull request with a description of the changes and any new environment needs
 5. Ensure tests pass in CI
-
-## License
-Specify your project license here (e.g., MIT). Replace this placeholder with the actual license file in the repo.
-
----
-
-If you'd like, I can:
-- add this README.md to the repository (I can prepare the commit message and create the file if you tell me the repo owner and branch you want it pushed to), or
-- generate a basic GitHub Actions workflow file to run the tests in CI, or
-- adapt the README to include a sample cypress.config.js and example package.json exactly matching your repo.
-```
